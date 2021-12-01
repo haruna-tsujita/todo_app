@@ -26,11 +26,14 @@
     <ul class="todo-list">
       <li v-for="todo in filteredTodos"
         class="todo"
-        :key="todo.id">
+        :key="todo.id"
+        :class="{editing: todo == editedTodo}">
         <div class="view">
-          <label>{{todo.title}}</label>
+          <label @dblclick="editTodo(todo)">{{todo.title}}</label>
           <button class="destroy" @click="removeTodo(todo)"></button>
         </div>
+        <input class="edit" type="text"
+				v-model="todo.title">
       </li>
     </ul>
   </section>
