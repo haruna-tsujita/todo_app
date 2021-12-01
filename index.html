@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang= "ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.jsプラクティス メモアプリ</title>
+  <link rel= "stylesheet" href="style.css">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <section class="todoapp">
+  <header class="header">
+    <h1>todos</h1>
+    <input class="new-todo"
+      autofocus
+      autocomplete="off"
+      placeholder="What needs to be done?"
+      v-model="newTodo"
+      @keypress.enter="addTodo">
+  </header>
+  <section class="main" v-show="todos.length" v-cloak>
+    <ul class="todo-list">
+      <li v-for="todo in filteredTodos"
+        class="todo"
+        :key="todo.id">
+        <div class="view">
+          <label>{{todo.title}}</label>
+          <button class="destroy" @click="removeTodo(todo)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  </section>
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+  </footer>
+<script src="main.js"></script>
+
+</body>
+</html>
