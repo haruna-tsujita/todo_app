@@ -18,6 +18,7 @@ const app = new Vue({
     todos: todoStorage.fetch(),
     editedTodo: null,
     newTodo: ''
+    // beforeEditCache: ''
   },
   computed: {
     filteredTodos() {
@@ -40,7 +41,24 @@ const app = new Vue({
       todoStorage.save(this.todos)
     },
     editTodo(todo) {
-			this.editedTodo = todo
+      this.editedTodo = todo
+			this.beforeEditCache = todo.title
+		},
+    doneEdit(todo) {
+			if (!this.editedTodo) {
+				return
+			}
+			this.editedTodo = null
+			const title = todo.title.trim()
+			if (title) {
+				todo.title = title;
+			} else {
+				this.removeTodo(todo)
+			}
+		},
+		cancelEdit(todo) {
+			this.editedTodo = null
+			todo.title = this.beforeEditCache
 		},
     removeTodo(todo) {
       this.todos.splice(this.todos.indexOf(todo), 1)

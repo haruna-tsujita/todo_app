@@ -33,7 +33,9 @@
           <button class="destroy" @click="removeTodo(todo)"></button>
         </div>
         <input class="edit" type="text"
-				v-model="todo.title">
+				v-model="todo.title"
+        @keypress.enter="doneEdit(todo)"
+				@keyup.esc="cancelEdit(todo)">
       </li>
     </ul>
   </section>
@@ -42,6 +44,5 @@
     <p>Double-click to edit a todo</p>
   </footer>
 <script src="main.js"></script>
-
 </body>
 </html>
