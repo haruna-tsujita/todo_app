@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Vue.jsプラクティス メモアプリ</title>
   <link rel= "stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <style>
     [v-cloak] {
       display: none;
@@ -12,37 +13,51 @@
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 <body>
-  <section class="todoapp">
-  <header class="header">
-    <h1>todos</h1>
-    <input class="new-todo"
-      autofocus
-      autocomplete="off"
-      placeholder="What needs to be done?"
-      v-model="newTodo"
-      @keypress.enter="addTodo">
-  </header>
-  <section class="main" v-show="todos.length" v-cloak>
-    <ul class="todo-list">
-      <li v-for="todo in filteredTodos"
-        class="todo"
-        :key="todo.id"
-        :class="{editing: todo == editedTodo}">
-        <div class="view">
-          <label @dblclick="editTodo(todo)">{{todo.title}}</label>
-          <button class="destroy" @click="removeTodo(todo)"></button>
-        </div>
-        <input class="edit" type="text"
-				v-model="todo.title"
-        @keypress.enter="doneEdit(todo)"
-				@keyup.esc="cancelEdit(todo)">
-      </li>
-    </ul>
-  </section>
-  </section>
-  <footer class="info">
-    <p>Double-click to edit a todo</p>
-  </footer>
+    <div class="mx-1 d-inline-block">
+      <section class="todoapp">
+      <header class="header">
+        <div class="container">
+        <h1>メモアプリ</h1>
+          <p>新規作成</p>
+          <input
+            class="form-control"
+            type="text"
+            class="new-todo"
+            autofocus
+            autocomplete="off"
+            placeholder="新しいメモを登録"
+            v-model="newTodo"
+            @keypress.enter="addTodo">
+      </header>
+      <div class=container>
+      <div class="mt-2">
+        <section class="main" v-show="todos.length" v-cloak>
+          <p>メモ一覧</p>
+          <ul class="todo-list">
+            <li v-for="todo in filteredTodos"
+              class="todo"
+              :key="todo.id"
+              :class="{editing: todo == editedTodo}">
+              <div class="mt-2">
+                <div class="view">
+                  <label @dblclick="editTodo(todo)">{{todo.title}}</label>
+                      <button type="button" class="btn btn-outline-danger" class="destroy" @click="removeTodo(todo)">削除</button>
+                </div>
+              </div>
+              <input
+              class="edit" type="text"
+              v-model="todo.title"
+              @keypress.enter="doneEdit(todo)"
+              @keyup.esc="cancelEdit(todo)">
+            </li>
+          </ul>
+          <p>ダブルクリックでメモを修正</p>
+        </section>
+      </div>
+      </div>
+      </section>
+    </div>
+  </div>
 <script src="main.js"></script>
 </body>
 </html>
