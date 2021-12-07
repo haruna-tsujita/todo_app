@@ -3,6 +3,7 @@ Todoリストを新規作成、修正、削除できるアプリです。
 
 # Install
 1. ローカル環境にファイルをダウンロードしてください。
+
 `$ git clone https://github.com/napple29/memo_app.git`
 
 2. index.htmlファイルをドラッグ&ドロップし、ブラウザ上で開いてください。
