@@ -17,15 +17,14 @@ const app = new Vue({
   data: {
     todos: todoStorage.fetch(),
     editedTodo: null,
-    newTodo: ''
-    // beforeEditCache: ''
+    newTodo: '',
+    beforeEditCache: ''
   },
   computed: {
     filteredTodos() {
       return this.todos
     }
   },
-
   methods: {
     addTodo() {
       const value = this.newTodo && this.newTodo.trim()
@@ -34,8 +33,7 @@ const app = new Vue({
       }
       this.todos.push({
         id: todoStorage.uid++,
-        title: value,
-        completed: false
+        title: value
       })
       this.newTodo = ''
       todoStorage.save(this.todos)
@@ -64,6 +62,13 @@ const app = new Vue({
       this.todos.splice(this.todos.indexOf(todo), 1)
       todoStorage.save(this.todos)
     }
-  }
+  },
+  directives: {
+		'todo-focus'(element, binding) {
+			if (binding.value) {
+				element.focus();
+			}
+		}
+	}
 })
 app.$mount('.todoapp')
