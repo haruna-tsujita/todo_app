@@ -30,7 +30,7 @@
           <section class="main" v-show="todos.length" v-cloak>
             <p>ToDo一覧</p>
             <ul class="todo-list">
-              <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{editing: todo == editedTodo}">
+              <li v-for="todo in todos" class="todo" :key="todo.id" :class="{editing: todo == editedTodo}">
                 <div class="mt-2">
                   <div class="view">
                     <label @dblclick="editTodo(todo)">{{todo.title}}</label>

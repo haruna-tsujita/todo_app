@@ -2,10 +2,16 @@ const STORAGE_KEY = 'todos-vuejs-2.0'
 const todoStorage = {
   fetch () {
     const todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    todos.forEach((todo, index) =>
-      todo.id === index
+    const todoId = []
+    todos.forEach((todo) =>
+      todoId.push(todo.id)
     )
-    todoStorage.uid = todos.length
+    const maxId = Math.max(...todoId)
+    if (Number.isFinite(maxId)) {
+      todoStorage.uid = maxId + 1
+    } else {
+      todoStorage.uid = 0
+    }
     return todos
   },
   save (todos) {
@@ -26,11 +32,6 @@ const app = new Vue({
     editedTodo: null,
     newTodo: '',
     beforeEditCache: ''
-  },
-  computed: {
-    filteredTodos () {
-      return this.todos
-    }
   },
   methods: {
     addTodo () {
@@ -57,6 +58,7 @@ const app = new Vue({
       const title = todo.title.trim()
       if (title) {
         todo.title = title
+        todoStorage.save(this.todos)
       } else {
         this.removeTodo(todo)
       }
