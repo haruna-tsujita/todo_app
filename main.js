@@ -2,10 +2,7 @@ const STORAGE_KEY = 'todos-vuejs-2.0'
 const todoStorage = {
   fetch () {
     const todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    const todoId = []
-    todos.forEach((todo) =>
-      todoId.push(todo.id)
-    )
+    const todoId = todos.map(todo => todo.id)
     const maxId = Math.max(...todoId)
     if (Number.isFinite(maxId)) {
       todoStorage.uid = maxId + 1
